@@ -19,6 +19,12 @@ import Html from './utils/Html';
 import App from './containers/App';
 import routes from './routes';
 import { port, host } from './config';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import CircularJSON from 'circular-json';
+
+const WIT_API = 'https://api.wit.ai/message';
+const WIT_ACCESS_TOKEN = 'LYDPNCC5PHXNJ3MZOGMYC6HLAAPPGENX';
 
 const app = express();
 
@@ -53,6 +59,22 @@ if (__DEV__) {
 
   app.use(require('webpack-hot-middleware')(compiler));
 }
+
+app.get('/api/message', function(req, res) {
+  const message = req.query.message;
+  const data = {
+    q: message,
+    access_token: WIT_ACCESS_TOKEN,
+  };
+  axios.get(WIT_API, { params: data, headers: { dataType: 'jsonp' } }).then((resp) => {
+    // console.log(resp);
+    const response = CircularJSON.stringify(resp);
+    res.send(response);
+  }).catch((error) => {
+    console.log('You fked up bro!!!', error);
+    res.send(error);
+  });
+});
 
 // Register server-side rendering middleware
 app.get('*', (req, res) => {

@@ -5,12 +5,12 @@ import SelectField from 'material-ui/SelectField';
 // import { withStyles } from 'material-ui/styles';
 // import ChatBot from '../../components/ChatBot';
 // const Widget = () => null;
-import {
-  Widget
-  //   addResponseMessage,
-  //   addLinkSnippet,
-  //   addUserMessage
-} from 'react-chat-widget';
+// import {
+//   Widget
+//   //   addResponseMessage,
+//   //   addLinkSnippet,
+//   //   addUserMessage
+// } from 'react-chat-widget';
 
 const textStyle = {
   color: 'white'
@@ -58,7 +58,7 @@ class PostAd extends Component {
       <div>
         <Form />
         {/* <ChatBot steps={steps} /> */}
-        <Widget />
+        {/*<Widget />*/}
       </div>
     );
   }

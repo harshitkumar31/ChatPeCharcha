@@ -240,7 +240,9 @@
   "dependencies": {
     "axios": "0.17.1",
     "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
     "chalk": "2.3.0",
+    "circular-json": "^0.5.1",
     "compression": "1.7.1",
     "express": "4.16.2",
     "helmet": "3.10.0",

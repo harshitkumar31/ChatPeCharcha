@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 // import { withStyles } from 'material-ui/styles';
 
 // const Widget = () => null;
-import {
-  Widget,
-  addResponseMessage
-  //   addLinkSnippet,
-  //   addUserMessage
-} from 'react-chat-widget';
+// import {
+//   // Widget,
+//   addResponseMessage
+//   //   addLinkSnippet,
+//   //   addUserMessage
+// } from 'react-chat-widget';
 import Form from '../../components/PostAdForm';
 // import ChatBot from '../../components/ChatBot';
 
@@ -18,9 +18,9 @@ class PostAd extends Component {
   }
 
   componentDidMount() {}
-  showForminWidget = msg => {
+  showForminWidget = () => {
     // addUserMessage(msg);
-    addResponseMessage(`You said ${msg}`);
+    // addResponseMessage(`You said ${msg}`);
     // addResponseMessage(<div>DId this render?</div>)
   };
   render() {
@@ -28,7 +28,7 @@ class PostAd extends Component {
       <div>
         <Form />
         {/* <ChatBot /> */}
-        <Widget handleNewUserMessage={this.showForminWidget} />
+        {/* <Widget handleNewUserMessage={this.showForminWidget} /> */}
       </div>
     );
   }

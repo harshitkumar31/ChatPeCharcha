@@ -12,6 +12,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import chalk from 'chalk';
+import fs from 'fs';
 
 import createHistory from 'history/createMemoryHistory';
 import configureStore from './configureStore';
@@ -19,6 +20,12 @@ import Html from './utils/Html';
 import App from './containers/App';
 import routes from './routes';
 import { port, host } from './config';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import CircularJSON from 'circular-json';
+
+const WIT_API = 'https://api.wit.ai/message';
+const WIT_ACCESS_TOKEN = 'LYDPNCC5PHXNJ3MZOGMYC6HLAAPPGENX';
 
 const app = express();
 
@@ -28,6 +35,7 @@ app.use(helmet());
 app.use(hpp());
 // Compress all requests
 app.use(compression());
+app.use(bodyParser());
 
 // Use morgan for http request debug (only show error)
 app.use(morgan('dev', { skip: (req, res) => res.statusCode < 400 }));
@@ -53,6 +61,36 @@ if (__DEV__) {
 
   app.use(require('webpack-hot-middleware')(compiler));
 }
+
+app.get('/api/message', (req, res) => {
+  const message = req.query.message;
+  const data = {
+    q: message,
+    access_token: WIT_ACCESS_TOKEN
+  };
+  axios
+    .get(WIT_API, { params: data, headers: { dataType: 'jsonp' } })
+    .then(resp => {
+      // console.log(resp);
+      const response = CircularJSON.stringify(resp);
+      res.send(response);
+    })
+    .catch(error => {
+      console.log('You fked up bro!!!', error);
+      res.send(error);
+    });
+});
+
+app.post('/save', (req, res) => {
+  fs.writeFile('./data.json', JSON.stringify(req.body), 'utf-8', err => {
+    if (err) {
+      res.status(500).json({});
+      throw err;
+    }
+    console.log('done');
+    res.status(201).json({});
+  });
+});
 
 // Register server-side rendering middleware
 app.get('*', (req, res) => {

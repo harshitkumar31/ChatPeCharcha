@@ -3,6 +3,12 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
+
+const buttonStyle = {
+  margin: 12
+};
 
 const textStyle = {
   color: 'white'
@@ -21,7 +27,29 @@ const conditions = [
 const screen = [
   <MenuItem key={1} value="42" primaryText="42" />,
   <MenuItem key={2} value="32" primaryText="32" />,
-  <MenuItem key={2} value="28" primaryText="28" />
+  <MenuItem key={3} value="28" primaryText="28" />
+];
+
+const brands = [
+  <MenuItem key={1} value="LG" primaryText="LG" />,
+  <MenuItem key={2} value="Samsung" primaryText="Samsung" />,
+  <MenuItem key={3} value="Sony" primaryText="Sony" />
+];
+
+const resolutions = [
+  <MenuItem key={1} value="Full HD" primaryText="Full HD" />,
+  <MenuItem key={2} value="HD Ready" primaryText="HD Ready" />,
+  <MenuItem key={3} value="SD" primaryText="SD" />
+];
+
+const techs = [
+  <MenuItem key={1} value="LED" primaryText="LED" />,
+  <MenuItem key={2} value="LCD" primaryText="LCD" />
+];
+
+const features = [
+  <MenuItem key={1} value="3D" primaryText="3D" />,
+  <MenuItem key={2} value="Smart" primaryText="Smart" />
 ];
 
 class Form extends Component {
@@ -43,6 +71,21 @@ class Form extends Component {
       mrp: null
     };
   }
+
+  submitData = data => {
+    axios
+      .post('/save', data)
+      .then(res => {
+        console.log('res', res);
+      })
+      .catch(e => {
+        console.log('e', e);
+      });
+  };
+
+  handleSubmit = () => {
+    this.submitData(this.state);
+  };
   handleChange = (event, index, value, name) => {
     console.log('here');
     this.setState({ [name]: value });
@@ -128,7 +171,7 @@ class Form extends Component {
             labelStyle={textStyle}
             hintText="Resolution"
           >
-            {screen}
+            {resolutions}
           </SelectField>
           <br />
           <SelectField
@@ -144,7 +187,7 @@ class Form extends Component {
             labelStyle={textStyle}
             hintText="Brand Name"
           >
-            {screen}
+            {brands}
           </SelectField>
           <br />
           <SelectField
@@ -160,8 +203,9 @@ class Form extends Component {
             labelStyle={textStyle}
             hintText="Display Technology"
           >
-            {screen}
+            {techs}
           </SelectField>
+          <br />
           <SelectField
             value={feature}
             onChange={(event, index, value) =>
@@ -175,16 +219,17 @@ class Form extends Component {
             labelStyle={textStyle}
             hintText="Feature"
           >
-            {screen}
+            {features}
           </SelectField>
           <br />
           <TextField
             id="adTitle"
-            label="Ad Title"
             type="text"
             margin="normal"
             value={adTitle}
-            onChange={e => this.handleChange(e, null, null, 'adTitle')}
+            onChange={e =>
+              this.handleChange(e, null, e.target.value, 'adTitle')
+            }
             inputStyle={textStyle}
             floatingLabelText="Ad Title"
             floatingLabelStyle={textStyle}
@@ -193,12 +238,11 @@ class Form extends Component {
           <br />
           <TextField
             id="price"
-            label="Price"
             type="text"
             margin="normal"
             value={price}
             inputStyle={textStyle}
-            onChange={e => this.handleChange(e, null, null, 'price')}
+            onChange={e => this.handleChange(e, null, e.target.value, 'price')}
             floatingLabelText="Price"
             floatingLabelStyle={textStyle}
             hintStyle={textStyle}
@@ -206,12 +250,13 @@ class Form extends Component {
           <br />
           <TextField
             id="mobileNumber"
-            label="Mobile Number"
             type="text"
             margin="normal"
             inputStyle={textStyle}
             value={phoneNumber}
-            onChange={e => this.handleChange(e, null, null, 'phoneNumber')}
+            onChange={e =>
+              this.handleChange(e, null, e.target.value, 'phoneNumber')
+            }
             floatingLabelText="Mobile Number"
             floatingLabelStyle={textStyle}
             hintStyle={textStyle}
@@ -219,11 +264,12 @@ class Form extends Component {
           <br />
           <TextField
             id="emailId"
-            label="Email Id"
             type="text"
             margin="normal"
             value={emailId}
-            onChange={e => this.handleChange(e, null, null, 'emailId')}
+            onChange={e =>
+              this.handleChange(e, null, e.target.value, 'emailId')
+            }
             inputStyle={textStyle}
             floatingLabelText="Email Id"
             floatingLabelStyle={textStyle}
@@ -232,11 +278,12 @@ class Form extends Component {
           <br />
           <TextField
             id="pinCode"
-            label="Pin Code"
             type="text"
             margin="normal"
             value={pinCode}
-            onChange={e => this.handleChange(e, null, null, 'pinCode')}
+            onChange={e =>
+              this.handleChange(e, null, e.target.value, 'pinCode')
+            }
             inputStyle={textStyle}
             floatingLabelText="Pin Code"
             floatingLabelStyle={textStyle}
@@ -245,17 +292,22 @@ class Form extends Component {
           <br />
           <TextField
             id="mrp"
-            label="MRP"
             type="text"
             margin="normal"
             value={mrp}
-            onChange={e => this.handleChange(e, null, null, 'mrp')}
+            onChange={e => this.handleChange(e, null, e.target.value, 'mrp')}
             inputStyle={textStyle}
             floatingLabelText="MRP"
             floatingLabelStyle={textStyle}
             hintStyle={textStyle}
           />
           <br />
+          <RaisedButton
+            label="Submit"
+            primary
+            style={buttonStyle}
+            onClick={this.handleSubmit}
+          />
         </div>
       </MuiThemeProvider>
     );

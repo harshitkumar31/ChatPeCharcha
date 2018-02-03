@@ -62,7 +62,7 @@ class PostAd extends Component {
       <div>
         {<ViewAd data={data} />}
         {/* <ChatBot /> */}
-                {/* 
+        {/* 
         <Widget
           handleNewUserMessage={this.showForminWidget}
           title="Seller"

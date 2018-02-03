@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 // import { withStyles } from 'material-ui/styles';
 
 // const Widget = () => null;
-import {
-  Widget,
-  addResponseMessage,
-  toggleWidget
-  // addLinkSnippet,
-  // addUserMessage
-} from 'react-chat-widget';
+// import {
+//   Widget,
+//   addResponseMessage,
+//   toggleWidget
+//   // addLinkSnippet,
+//   // addUserMessage
+// } from 'react-chat-widget';
 import axios from 'axios';
 import ViewAd from '../../components/ViewAd';
 import './index.scss';
@@ -31,7 +31,7 @@ class PostAd extends Component {
       }
     });
 
-    toggleWidget();
+    // toggleWidget();
   }
   showForminWidget = msg => {
     // addUserMessage(msg);
@@ -45,7 +45,7 @@ class PostAd extends Component {
   askBot = msg => {
     axios.get(`/api/message?message=${msg}`).then(res => {
       if (res.status === 200) {
-        addResponseMessage(`${res.data.message}`);
+        // addResponseMessage(`${res.data.message}`);
       }
     });
   };
@@ -62,12 +62,12 @@ class PostAd extends Component {
       <div>
         {<ViewAd data={data} />}
         {/* <ChatBot /> */}
-
+                {/* 
         <Widget
           handleNewUserMessage={this.showForminWidget}
           title="Seller"
           subtitle=""
-        />
+        /> */}
       </div>
     );
   }

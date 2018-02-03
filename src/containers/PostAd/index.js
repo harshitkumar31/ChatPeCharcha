@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // const Widget = () => null;
 
-import { Widget, addResponseMessage, toggleWidget } from 'react-chat-widget';
+// import { Widget, addResponseMessage, toggleWidget } from 'react-chat-widget';
 
 import Form from '../../components/PostAdForm';
 import ViewAd from '../../components/ViewAd';
@@ -26,7 +26,7 @@ class PostAd extends Component {
     // addUserMessage(msg);
     // addResponseMessage(`You said ${msg}`);
     // addResponseMessage(<div>DId this render?</div>)
-    addResponseMessage('Okay');
+    // addResponseMessage('Okay');
   };
 
   formOnSubmit = data => {
@@ -38,8 +38,8 @@ class PostAd extends Component {
     //   'Do you want to answer some questions to improve your Ad?'
     // );
 
-    toggleWidget();
-    addResponseMessage('Do you want me to negotiate on your behalf?');
+    // toggleWidget();
+    // addResponseMessage('Do you want me to negotiate on your behalf?');
     // this.showFaqs();
 
     this.askQuestions();
@@ -55,7 +55,7 @@ class PostAd extends Component {
 
     axios.get(`/api/message?message=${msg}`).then(res => {
       if (res.status === 200) {
-        addResponseMessage(`${res.data.message}`);
+        // addResponseMessage(`${res.data.message}`);
       }
     });
   };
@@ -67,12 +67,12 @@ class PostAd extends Component {
         {show && <ViewAd data={data} />}
         {/* <ChatBot /> */}
 
-        <Widget
+        {/* <Widget
           handleNewUserMessage={!show ? this.showFaqs : this.showForminWidget}
           title="QChat"
           subtitle="Let me help you"
           style={{ color: '#333' }}
-        />
+        /> */}
       </div>
     );
   }

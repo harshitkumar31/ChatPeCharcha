@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 // const Widget = () => null;
+
 import { Widget, addResponseMessage, toggleWidget } from 'react-chat-widget';
+
 import Form from '../../components/PostAdForm';
 import ViewAd from '../../components/ViewAd';
 import './index.scss';

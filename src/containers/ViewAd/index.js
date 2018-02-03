@@ -6,8 +6,8 @@ import {
   Widget,
   addResponseMessage,
   toggleWidget
-  //   addLinkSnippet,
-  //   addUserMessage
+  // addLinkSnippet,
+  // addUserMessage
 } from 'react-chat-widget';
 import axios from 'axios';
 import ViewAd from '../../components/ViewAd';
@@ -65,8 +65,8 @@ class PostAd extends Component {
 
         <Widget
           handleNewUserMessage={this.showForminWidget}
-          title="QChat"
-          subtitle="Let me help you"
+          title="Seller"
+          subtitle=""
         />
       </div>
     );

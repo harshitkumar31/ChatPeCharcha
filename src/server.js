@@ -22,7 +22,8 @@ import routes from './routes';
 import { port, host } from './config';
 import bodyParser from 'body-parser';
 import axios from 'axios';
-import CircularJSON from 'circular-json';
+// import CircularJSON from 'circular-json';
+
 import { getReply, fillData } from 'MessageReplyHelpers';
 
 const WIT_API = 'https://api.wit.ai/message';

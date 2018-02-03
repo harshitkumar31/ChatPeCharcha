@@ -71,7 +71,7 @@ class Form extends Component<Props> {
       emailId: null,
       pincode: null,
       mrp: null,
-      minprice: null
+      minPrice: null
     };
   }
 
@@ -109,7 +109,7 @@ class Form extends Component<Props> {
       size,
       title,
       type,
-      minprice
+      minPrice
     } = this.state;
     return (
       <MuiThemeProvider>
@@ -252,13 +252,13 @@ class Form extends Component<Props> {
           />
           <br />
           <TextField
-            id="minprice"
+            id="minPrice"
             type="text"
             margin="normal"
-            value={minprice}
+            value={minPrice}
             inputStyle={textStyle}
             onChange={e =>
-              this.handleChange(e, null, e.target.value, 'minprice')
+              this.handleChange(e, null, e.target.value, 'minPrice')
             }
             floatingLabelText="Min Price"
             floatingLabelStyle={textStyle}

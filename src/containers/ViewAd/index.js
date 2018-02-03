@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 // import { withStyles } from 'material-ui/styles';
 
 // const Widget = () => null;
-import {
-  Widget,
-  addResponseMessage,
-  toggleWidget
+// import {
+  // Widget,
+  // addResponseMessage,
+  // toggleWidget
   //   addLinkSnippet,
   //   addUserMessage
-} from 'react-chat-widget';
+// } from 'react-chat-widget';
 import axios from 'axios';
 import ViewAd from '../../components/ViewAd';
 
@@ -29,7 +29,7 @@ class PostAd extends Component {
         });
       }
     });
-    toggleWidget();
+    // toggleWidget();
   }
   showForminWidget = msg => {
     // addUserMessage(msg);
@@ -59,11 +59,11 @@ class PostAd extends Component {
         {<ViewAd data={data} />}
         {/* <ChatBot /> */}
         {
-          <Widget
+          /*<Widget
             handleNewUserMessage={this.showForminWidget}
             title="QChat"
             subtitle="Let me help you"
-          />
+          />*/
         }
       </div>
     );

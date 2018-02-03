@@ -23,7 +23,7 @@ import { port, host } from './config';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import CircularJSON from 'circular-json';
-import { getReply } from 'MessageReplyHelpers';
+import { getReply } from './MessageReplyHelpers';
 
 const WIT_API = 'https://api.wit.ai/message';
 const WIT_ACCESS_TOKEN = 'LYDPNCC5PHXNJ3MZOGMYC6HLAAPPGENX';

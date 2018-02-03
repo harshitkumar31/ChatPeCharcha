@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 // import { withStyles } from 'material-ui/styles';
 
 // const Widget = () => null;
-import {
-  Widget,
+// import {
+  // Widget,
   // addResponseMessage,
-  toggleWidget
-} from 'react-chat-widget';
+  // toggleWidget
+// } from 'react-chat-widget';
 import Form from '../../components/PostAdForm';
 import ViewAd from '../../components/ViewAd';
 
@@ -44,11 +44,11 @@ class PostAd extends Component {
         {show && <ViewAd data={data} />}
         {/* <ChatBot /> */}
 
-        <Widget
+        {/* <Widget
           handleNewUserMessage={this.showForminWidget}
           title="QChat"
           subtitle="Let me help you"
-        />
+        /> */}
       </div>
     );
   }

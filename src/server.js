@@ -92,6 +92,18 @@ app.post('/save', (req, res) => {
   });
 });
 
+app.get('/viewAd', (req, res) => {
+  try {
+    const rawdata = fs.readFileSync('./data.json');
+    const adData = JSON.parse(rawdata);
+    res.status(200).json({ ...adData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({});
+    // throw err;
+  }
+});
+
 // Register server-side rendering middleware
 app.get('*', (req, res) => {
   if (__DEV__) webpackIsomorphicTools.refresh();

@@ -52,22 +52,24 @@ const features = [
   <MenuItem key={2} value="Smart" primaryText="Smart" />
 ];
 
-class Form extends Component {
+type Props = any;
+
+class Form extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
       type: null,
       condition: null,
-      screenSize: null,
+      size: null,
       resolution: null,
-      brandName: null,
-      disp: null,
+      brand: null,
+      display: null,
       feature: null,
-      adTitle: null,
+      title: null,
       price: null,
-      phoneNumber: null,
+      mobile: null,
       emailId: null,
-      pinCode: null,
+      pincode: null,
       mrp: null
     };
   }
@@ -85,6 +87,7 @@ class Form extends Component {
 
   handleSubmit = () => {
     this.submitData(this.state);
+    this.props.formOnSubmit(this.state);
   };
   handleChange = (event, index, value, name) => {
     console.log('here');
@@ -92,18 +95,18 @@ class Form extends Component {
   };
   render() {
     const {
-      adTitle,
-      brandName,
+      brand,
       condition,
-      disp,
+      display,
       emailId,
       feature,
+      mobile,
       mrp,
-      phoneNumber,
-      pinCode,
+      pincode,
       price,
       resolution,
-      screenSize,
+      size,
+      title,
       type
     } = this.state;
     return (
@@ -143,9 +146,9 @@ class Form extends Component {
           </SelectField>
           <br />
           <SelectField
-            value={screenSize}
+            value={size}
             onChange={(event, index, value) =>
-              this.handleChange(event, index, value, 'screenSize')
+              this.handleChange(event, index, value, 'size')
             }
             floatingLabelText="Screen Size"
             floatingLabelFixed
@@ -175,9 +178,9 @@ class Form extends Component {
           </SelectField>
           <br />
           <SelectField
-            value={brandName}
+            value={brand}
             onChange={(event, index, value) =>
-              this.handleChange(event, index, value, 'brandName')
+              this.handleChange(event, index, value, 'brand')
             }
             floatingLabelText="Brand Name"
             floatingLabelFixed
@@ -191,9 +194,9 @@ class Form extends Component {
           </SelectField>
           <br />
           <SelectField
-            value={disp}
+            value={display}
             onChange={(event, index, value) =>
-              this.handleChange(event, index, value, 'disp')
+              this.handleChange(event, index, value, 'display')
             }
             floatingLabelText="Display Technology"
             floatingLabelFixed
@@ -226,10 +229,8 @@ class Form extends Component {
             id="adTitle"
             type="text"
             margin="normal"
-            value={adTitle}
-            onChange={e =>
-              this.handleChange(e, null, e.target.value, 'adTitle')
-            }
+            value={title}
+            onChange={e => this.handleChange(e, null, e.target.value, 'title')}
             inputStyle={textStyle}
             floatingLabelText="Ad Title"
             floatingLabelStyle={textStyle}
@@ -253,10 +254,8 @@ class Form extends Component {
             type="text"
             margin="normal"
             inputStyle={textStyle}
-            value={phoneNumber}
-            onChange={e =>
-              this.handleChange(e, null, e.target.value, 'phoneNumber')
-            }
+            value={mobile}
+            onChange={e => this.handleChange(e, null, e.target.value, 'mobile')}
             floatingLabelText="Mobile Number"
             floatingLabelStyle={textStyle}
             hintStyle={textStyle}
@@ -280,9 +279,9 @@ class Form extends Component {
             id="pinCode"
             type="text"
             margin="normal"
-            value={pinCode}
+            value={pincode}
             onChange={e =>
-              this.handleChange(e, null, e.target.value, 'pinCode')
+              this.handleChange(e, null, e.target.value, 'pincode')
             }
             inputStyle={textStyle}
             floatingLabelText="Pin Code"

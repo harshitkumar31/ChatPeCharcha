@@ -9,7 +9,7 @@ import {
   //   addLinkSnippet,
   //   addUserMessage
 } from 'react-chat-widget';
-
+import axios from 'axios';
 import ViewAd from '../../components/ViewAd';
 
 class PostAd extends Component {
@@ -17,35 +17,54 @@ class PostAd extends Component {
     super(props);
     this.responses = [];
     this.state = {
-      show: false,
       data: {}
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios.get('/viewAd').then(res => {
+      if (res.status === 200) {
+        this.setState({
+          data: res.data
+        });
+      }
+    });
+    toggleWidget();
+  }
   showForminWidget = msg => {
     // addUserMessage(msg);
-    addResponseMessage(`You said ${msg}`);
+    // addResponseMessage(`You said ${msg}`);
+    this.askBot(msg);
     // addResponseMessage(<div>DId this render?</div>)
   };
 
+  askBot = msg => {
+    axios.get(`/api/message?message=${msg}`).then(res => {
+      if (res.status === 200) {
+        addResponseMessage(`${res.data.message}`);
+      }
+    });
+  };
+
   formOnSubmit = data => {
-    toggleWidget();
+    // toggleWidget();
     this.setState({
       data
     });
   };
   render() {
-    const { show, data } = this.state;
+    const { data } = this.state;
     return (
       <div>
-        {show && <ViewAd data={data} />}
+        {<ViewAd data={data} />}
         {/* <ChatBot /> */}
-        <Widget
-          handleNewUserMessage={this.showForminWidget}
-          title="QChat"
-          subtitle="Let me help you"
-        />
+        {
+          <Widget
+            handleNewUserMessage={this.showForminWidget}
+            title="QChat"
+            subtitle="Let me help you"
+          />
+        }
       </div>
     );
   }

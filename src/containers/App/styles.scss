@@ -24,4 +24,9 @@ body {
     margin-top: 0;
     opacity: 0.15;
   }
+  
+  .message > .response {
+    background-color: black;
+    color: white;
+  }
 }

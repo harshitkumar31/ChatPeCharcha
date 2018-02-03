@@ -3,13 +3,24 @@
 import type { Dispatch } from './types';
 import { fetchUsersIfNeeded } from './actions/users';
 import { fetchUserIfNeeded } from './actions/user';
-import { HomePage, UserInfoPage, NotFoundPage, PostAdPage } from './containers';
+import {
+  HomePage,
+  UserInfoPage,
+  NotFoundPage,
+  PostAdPage,
+  ViewAdPage
+} from './containers';
 
 export default [
   {
     path: '/post',
     exact: true,
     component: PostAdPage
+  },
+  {
+    path: '/view',
+    exact: true,
+    component: ViewAdPage
   },
   {
     path: '/',

@@ -23,6 +23,7 @@ import { port, host } from './config';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import CircularJSON from 'circular-json';
+import { getReply } from 'MessageReplyHelpers';
 
 const WIT_API = 'https://api.wit.ai/message';
 const WIT_ACCESS_TOKEN = 'LYDPNCC5PHXNJ3MZOGMYC6HLAAPPGENX';
@@ -72,8 +73,26 @@ app.get('/api/message', (req, res) => {
     .get(WIT_API, { params: data, headers: { dataType: 'jsonp' } })
     .then(resp => {
       // console.log(resp);
-      const response = CircularJSON.stringify(resp);
-      res.send(response);
+      const data = resp.data;
+      const result = {};
+      const attributes = {};
+      // call the method which gives the response for given message
+      Object.keys(data.entities).forEach((v, i) => {
+        attributes[v] = [];
+        console.log('values ', v, data.entities[v]);
+        if (data.entities[v]) {
+          data.entities[v].forEach((value, index) => {
+            if (value.confidence > 0.6) {
+              attributes[v].push(value.value);
+            }
+          });
+        }
+      });
+      console.log(attributes);
+      result.message = getReply(attributes);
+      console.log(result.message);
+      res.set('Content-Type', 'application/json');
+      res.send(JSON.stringify(result)).end();
     })
     .catch(error => {
       console.log('You fked up bro!!!', error);

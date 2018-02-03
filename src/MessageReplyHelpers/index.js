@@ -1,8 +1,7 @@
-const formData = require('../../data.json');
 
 let actualObj = [];
 
-console.log(formData);
+// console.log(formData);
 const dataObj = [
   {
     data: [['how', 'what'], ['old'], ['tv']],
@@ -52,14 +51,20 @@ const dataObj = [
     data: [[], ['final'], []],
     reply: 'Will this be your final price',
     priority: 1
+  },
+  {
+    data: [[], ['final price'], []],
+    reply: 'Great! Sounds good. We have a deal!',
+    priority: 1
   }
 ];
 
 export const getReply = ({ subject, intentName, target, number }) => {
   let result = {};
   console.log('number here', number, intentName);
+  console.log('data object', dataObj);
   if (number) {
-    result.reply = processNumbers(number[0], intentName);
+    result.reply = processNumbers(number[0], intentName[0]);
   } else if (intentName) {
     intentName.forEach(item => {
       actualObj.forEach(obj => {
@@ -79,6 +84,7 @@ export const getReply = ({ subject, intentName, target, number }) => {
 };
 
 export const processNumbers = (number, intent) => {
+  const formData = require('../../data.json');
   const { price: p, minPrice: mp } = formData;
   const price = parseInt(p, 10);
   const minPrice = parseInt(mp, 10);

@@ -11,6 +11,7 @@ import {
 } from 'react-chat-widget';
 import axios from 'axios';
 import ViewAd from '../../components/ViewAd';
+import './index.scss';
 
 class PostAd extends Component {
   constructor(props) {
@@ -29,13 +30,16 @@ class PostAd extends Component {
         });
       }
     });
+
     toggleWidget();
   }
   showForminWidget = msg => {
     // addUserMessage(msg);
     // addResponseMessage(`You said ${msg}`);
-    this.askBot(msg);
+
     // addResponseMessage(<div>DId this render?</div>)
+
+    this.askBot(msg);
   };
 
   askBot = msg => {
@@ -58,13 +62,12 @@ class PostAd extends Component {
       <div>
         {<ViewAd data={data} />}
         {/* <ChatBot /> */}
-        {
-          <Widget
-            handleNewUserMessage={this.showForminWidget}
-            title="QChat"
-            subtitle="Let me help you"
-          />
-        }
+
+        <Widget
+          handleNewUserMessage={this.showForminWidget}
+          title="QChat"
+          subtitle="Let me help you"
+        />
       </div>
     );
   }

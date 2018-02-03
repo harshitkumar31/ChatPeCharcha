@@ -23,7 +23,7 @@ import { port, host } from './config';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import CircularJSON from 'circular-json';
-import { getReply } from 'MessageReplyHelpers';
+import { getReply, fillData } from 'MessageReplyHelpers';
 
 const WIT_API = 'https://api.wit.ai/message';
 const WIT_ACCESS_TOKEN = 'LYDPNCC5PHXNJ3MZOGMYC6HLAAPPGENX';
@@ -101,7 +101,25 @@ app.get('/api/message', (req, res) => {
 });
 
 app.post('/save', (req, res) => {
+  fillData(req.body);
   fs.writeFile('./data.json', JSON.stringify(req.body), 'utf-8', err => {
+    if (err) {
+      res.status(500).json({});
+      throw err;
+    }
+    console.log('done');
+    res.status(201).json({});
+  });
+});
+
+app.put('/save', (req, res) => {
+  const rawdata = fs.readFileSync('./data.json');
+  const adData = JSON.parse(rawdata);
+  const dataToSave = {
+    ...adData,
+    ...req.body
+  };
+  fs.writeFile('./data.json', JSON.stringify(dataToSave), 'utf-8', err => {
     if (err) {
       res.status(500).json({});
       throw err;

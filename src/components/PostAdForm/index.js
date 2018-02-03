@@ -48,8 +48,8 @@ const techs = [
 ];
 
 const features = [
-  <MenuItem key={1} value="3D" primaryText="3D" />,
-  <MenuItem key={2} value="Smart" primaryText="Smart" />
+  <MenuItem key={1} value="3D TV" primaryText="3D" />,
+  <MenuItem key={2} value="Smart TV" primaryText="Smart" />
 ];
 
 type Props = any;
@@ -70,7 +70,8 @@ class Form extends Component<Props> {
       mobile: null,
       emailId: null,
       pincode: null,
-      mrp: null
+      mrp: null,
+      minprice: null
     };
   }
 
@@ -107,7 +108,8 @@ class Form extends Component<Props> {
       resolution,
       size,
       title,
-      type
+      type,
+      minprice
     } = this.state;
     return (
       <MuiThemeProvider>
@@ -245,6 +247,20 @@ class Form extends Component<Props> {
             inputStyle={textStyle}
             onChange={e => this.handleChange(e, null, e.target.value, 'price')}
             floatingLabelText="Price"
+            floatingLabelStyle={textStyle}
+            hintStyle={textStyle}
+          />
+          <br />
+          <TextField
+            id="minprice"
+            type="text"
+            margin="normal"
+            value={minprice}
+            inputStyle={textStyle}
+            onChange={e =>
+              this.handleChange(e, null, e.target.value, 'minprice')
+            }
+            floatingLabelText="Min Price"
             floatingLabelStyle={textStyle}
             hintStyle={textStyle}
           />

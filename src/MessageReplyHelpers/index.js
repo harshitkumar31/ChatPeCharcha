@@ -1,15 +1,29 @@
 const dataObj = [
-  { data: [['how', 'what'], ['old'], ['tv']], reply: 'I got it 3 years back', priority: 1 },
-  { data: [[], ['touchscreen'], ['tv']], reply: 'Its touchscreen with built-in speakers and remote', priority: 1 },
+  {
+    data: [['how', 'what'], ['old'], ['tv']],
+    reply: 'I got it 3 years back',
+    priority: 1
+  },
+  {
+    data: [[], ['touchscreen'], ['tv']],
+    reply: 'Its touchscreen with built-in speakers and remote',
+    priority: 1
+  },
   { data: [[], ['mountable'], []], reply: 'Yes, it is mountable', priority: 1 },
-  { data: [[], ['compatible'], []], reply: 'Mac and Windows compatible', priority: 1 }
+  {
+    data: [[], ['compatible'], []],
+    reply: 'Mac and Windows compatible',
+    priority: 1
+  }
 ];
+
+let actualObj = [];
 
 export const getReply = ({ subject, intentName, target }) => {
   let result = {};
   if (intentName) {
     intentName.forEach(item => {
-      dataObj.forEach(obj => {
+      actualObj.forEach(obj => {
         const { data, reply, priority } = obj;
         if (data[1].indexOf(item) > -1) {
           if (!result.priority || result.priority < priority) {
@@ -19,7 +33,7 @@ export const getReply = ({ subject, intentName, target }) => {
       });
     });
   } else {
-    result.reply = 'Sorry, I\'m unable to understand you';
+    result.reply = "Sorry, I'm unable to understand you";
   }
   return result.reply;
 };
@@ -43,12 +57,14 @@ const formData = {
 
 const highPriorityWords = ['negotiate'];
 
-const fillData = values => {
-  Object.keys(values).forEach(attr => {
+export const fillData = values => {
+  const arr = Object.keys(values).map(attr => {
     const priority = highPriorityWords.indexOf(attr) > -1 ? 10 : 1;
-    dataObj.push({ data: [[], [attr], ['tv']], reply: values[attr], priority });
+    return { data: [[], [attr], ['tv']], reply: values[attr], priority };
+    // dataObj.push({ data: [[], [attr], ['tv']], reply: values[attr], priority });
   });
+  actualObj = dataObj.concat(arr);
 };
 
-fillData(formData);
+// fillData(formData);
 // console.log(formData);
